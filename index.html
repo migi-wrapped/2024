@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Migi Wrapped</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta property="og:title" content="Migi Wrapped">
     <meta property="og:description" content="Discover your personal Migros shopping journey! Upload your shopping data and explore fascinating insights about your shopping habits, favorite products, and spending patterns in an engaging Spotify Wrapped-style experience.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://migi-wrapped.ch/help/step1.png">
+    <meta property="og:image" content="https://migi-wrapped.ch/banner.png">
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -53,7 +54,8 @@
     </script>
 </head>
 <body class="bg-gray-100 min-h-screen">
-    <div id="upload-container" class="h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-100">
+    <div id="upload-container" class="h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-100 relative">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('banner.png'); transform: translateY(-12rem);"></div>
         <a href="help/help.html" class="fixed top-4 right-4 w-10 h-10 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 group shadow-lg ring-1 ring-migros/10">
             <i data-lucide="help-circle" class="w-5 h-5 text-gray-600 group-hover:text-migros transition-colors"></i>
         </a>
