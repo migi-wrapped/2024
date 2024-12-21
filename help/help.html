@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migros Wrapped - Help</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        migros: '#ff6b00',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 max-w-4xl py-8">
+        <div class="text-center mb-6 space-y-3">
+            <div class="flex justify-center mb-3">
+                <div class="w-12 h-12 bg-migros/10 rounded-full flex items-center justify-center">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-migros"></i>
+                </div>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
+                How to use <span class="text-migros">Migros</span> Wrapped
+            </h1>
+            <p class="text-base text-gray-600">Follow these steps to get your personalized shopping insights</p>
+        </div>
+
+        <div class="space-y-8 max-w-2xl mx-auto">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="space-y-2 mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Step 1: Login to Migros Account</h2>
+                    <p class="text-gray-600">Visit <a href="https://account.migros.ch" target="_blank" class="text-migros hover:underline">account.migros.ch</a> and log in to your account.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="space-y-2 mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Step 2: Navigate to Purchases</h2>
+                    <p class="text-gray-600">Go to Einkäufe "Purchases" at <a href="https://account.migros.ch/purchases/receipts" target="_blank" class="text-migros hover:underline">account.migros.ch/purchases/receipts</a></p>
+                </div>
+                <img src="step1.png" alt="Navigate to Purchases" class="rounded-lg border border-gray-200 w-full">
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="space-y-2 mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Step 3: Download Your Data</h2>
+                    <p class="text-gray-600">Click the download button, select the correct year, and download as table/CSV format.</p>
+                </div>
+                <img src="step2.png" alt="Download CSV" class="rounded-lg border border-gray-200 w-full">
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="space-y-2">
+                    <h2 class="text-xl font-semibold text-gray-800">Step 4: Upload to Migros Wrapped</h2>
+                    <p class="text-gray-600">Return to <a href="/" class="text-migros hover:underline">migi-wrapped.ch</a> and upload your downloaded CSV file.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-400">
+                <div class="space-y-2">
+                    <h2 class="text-xl font-semibold text-gray-800">Disclaimer</h2>
+                    <div class="text-gray-600 space-y-2">
+                        <p>This is a free tool with no obligations. I have no affiliations with Migros.</p>
+                        <p>All data (CSV files or any other entered data) is processed locally in your browser and stays on your device. No data is collected or stored on any servers.</p>
+                        <p>This website is hosted on GitHub Pages and the project is open source. You can view the source code on GitHub.</p>
+                        <p>Works best with modern browsers (Chrome, Firefox, Safari, Edge). No additional software installation required.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="../index.html" class="inline-flex items-center justify-center px-6 py-3 bg-migros text-white font-medium rounded-full transition-all hover:bg-migros/90 hover:shadow">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
