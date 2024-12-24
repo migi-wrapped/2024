@@ -18,7 +18,10 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 min-h-screen relative">
+    <a href="../index.html" class="fixed top-4 left-4 w-10 h-10 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 group shadow-lg ring-1 ring-migros/10">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-gray-600 group-hover:text-migros transition-colors"></i>
+    </a>
     <div class="container mx-auto px-4 max-w-4xl py-8">
         <div class="text-center mb-6 space-y-3">
             <div class="flex justify-center mb-3">
@@ -63,7 +66,7 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-400">
+            <div id="disclaimer" class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-400">
                 <div class="space-y-2">
                     <h2 class="text-xl font-semibold text-gray-800">Disclaimer</h2>
                     <div class="text-gray-600 space-y-2">
