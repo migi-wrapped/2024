@@ -1,188 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=de>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Migi Wrapped</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <meta property="og:title" content="Migi Wrapped">
-    <meta property="og:description" content="Discover your personal Migros shopping journey! Upload your shopping data and explore fascinating insights about your shopping habits, favorite products, and spending patterns in an engaging Spotify Wrapped-style experience.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://migi-wrapped.ch/banner.png">
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <style>
-        #slide-content {
-            transition: transform 0.3s ease-out;
-            transform: translateX(0);
-            will-change: transform;
-        }
-        #slide-content.sliding-left {
-            transform: translateX(-100%);
-        }
-        #slide-content.sliding-right {
-            transform: translateX(100%);
-        }
-        .slide-enter-right {
-            animation: slideEnterRight 0.3s ease-out forwards;
-        }
-        .slide-enter-left {
-            animation: slideEnterLeft 0.3s ease-out forwards;
-        }
-        @keyframes slideEnterRight {
-            from { opacity: 0; transform: translateX(50%); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideEnterLeft {
-            from { opacity: 0; transform: translateX(-50%); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        migros: '#ff6b00',
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Migi Wrapped</title>
+<link rel=icon type=image/x-icon href=favicon.ico>
+<meta property=og:title content="Migi Wrapped">
+<meta property=og:description content="Entdecke deine persönliche Migros-Einkaufsreise! Lade deine Einkaufsdaten hoch und erkunde faszinierende Einblicke in deine Einkaufsgewohnheiten, Lieblingsprodukte und Ausgabemuster in einer ansprechenden Spotify Wrapped-ähnlichen Erfahrung.">
+<meta property=og:type content=website>
+<meta property=og:image content=https://migi-wrapped.ch/banner.png>
+<script src=https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js></script>
+<script src=https://cdn.tailwindcss.com></script>
+<script src=https://cdn.jsdelivr.net/npm/chart.js></script>
+<script src=https://unpkg.com/lucide@latest></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js></script>
+<style>#slide-content{transition:transform .3s ease-out;transform:translateX(0);will-change:transform}#slide-content.sliding-left{transform:translateX(-100%)}#slide-content.sliding-right{transform:translateX(100%)}.slide-enter-right{animation:slideEnterRight .3s ease-out forwards}.slide-enter-left{animation:slideEnterLeft .3s ease-out forwards}@keyframes slideEnterRight{from{opacity:0;transform:translateX(50%)}to{opacity:1;transform:translateX(0)}}@keyframes slideEnterLeft{from{opacity:0;transform:translateX(-50%)}to{opacity:1;transform:translateX(0)}}</style>
+<script>tailwind.config={theme:{extend:{colors:{migros:"#ff6b00"}}}}</script>
 </head>
 <body class="bg-gray-100 min-h-screen">
-    <div id="upload-container" class="h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-100 relative">
-        <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('banner.png'); transform: translateY(-12rem);"></div>
-        <div class="container mx-auto px-4 max-w-4xl">
-            <div class="text-center mb-6 space-y-3">
-                <div class="flex justify-center mb-3">
-                    <div class="w-12 h-12 bg-migros/10 rounded-full flex items-center justify-center">
-                        <i data-lucide="shopping-cart" class="w-6 h-6 text-migros"></i>
-                    </div>
-                </div>
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
-                    Your <span class="text-migros">Migi</span> Year
-                </h1>
-                <p class="text-base text-gray-600">Let's discover your shopping journey!</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-3 max-w-2xl mx-auto">
-                <div class="bg-white rounded-lg shadow p-3 transform hover:scale-105 transition-transform duration-300">
-                    <input type="file" id="csvFile" accept=".csv" class="hidden" />
-                    <label for="csvFile" class="cursor-pointer block">
-                        <div class="border border-dashed border-migros/30 rounded p-3 hover:border-migros transition-colors">
-                            <div class="text-center space-y-3">
-                                <div class="bg-migros/10 rounded-full w-10 h-10 flex items-center justify-center mx-auto">
-                                    <i data-lucide="upload-cloud" class="w-5 h-5 text-migros"></i>
-                                </div>
-                                <div>
-                                    <p class="text-base font-semibold text-gray-800">Upload Your Data</p>
-                                    <p class="text-xs text-gray-600">Drop your Migros receipt CSV for a personalized experience</p>
-                                    <a href="help/help.html" class="mt-3 inline-flex items-center gap-1.5 text-sm text-migros hover:text-migros/80 transition-colors">
-                                        <i data-lucide="help-circle" class="w-4 h-4"></i>
-                                        How to get the CSV
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-
-                <div class="bg-white rounded-lg shadow p-3 transform hover:scale-105 transition-transform duration-300">
-                    <div class="text-center space-y-3">
-                        <div class="bg-migros/10 rounded-full w-10 h-10 flex items-center justify-center mx-auto">
-                            <i data-lucide="sparkles" class="w-5 h-5 text-migros"></i>
-                        </div>
-                        <div>
-                            <p class="text-base font-semibold text-gray-800">Try Demo Version</p>
-                            <p class="text-xs text-gray-600">Experience the features with our sample data</p>
-                        </div>
-                        <button id="startButton" class="bg-migros text-white font-medium py-1.5 px-4 rounded-full text-sm transition-all hover:bg-migros/90 hover:shadow flex items-center justify-center w-full group">
-                            <i data-lucide="play" class="w-5 h-5 mr-2"></i>
-                            Start Demo
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="absolute bottom-4 left-0 right-0 text-center">
-            <a href="help/help.html#disclaimer" class="text-sm text-gray-500 hover:text-migros transition-colors">Disclaimer</a>
-        </div>
-    </div>
-
-    <div id="presentation-wrapper" class="hidden fixed inset-0 isolate">
-        <div id="presentation-container" class="fixed inset-0 bg-gray-100">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gray-200">
-                <div id="progress-bar" class="h-full bg-migros transition-all duration-[5000ms] ease-linear w-0"></div>
-            </div>
-            <div id="slide-container" class="relative flex-grow">
-                <div id="slide-content" class="text-gray-800 h-[calc(100vh-5rem)] flex flex-col pt-8">
-                    <!-- Slides will be injected here -->
-                </div>
-            </div>
-            <div class="fixed bottom-0 left-0 right-0 h-20 bg-gray-100 flex flex-col sm:flex-row items-center justify-center gap-4 text-gray-800 text-sm px-4 border-t border-gray-200">
-                <div class="flex items-center gap-4">
-                    <span class="hidden sm:inline">Press space to pause, arrow keys to navigate</span>
-                    <span class="sm:hidden">Swipe to navigate</span>
-                    <span id="page-indicator" class="text-gray-600"></span>
-                </div>
-                <span class="text-gray-400 hidden sm:inline">|</span>
-                <label class="cursor-pointer hover:text-migros transition-colors flex items-center gap-1 whitespace-nowrap">
-                    <i data-lucide="upload" class="w-4 h-4"></i>
-                    <span>Upload new CSV</span>
-                    <input type="file" id="presentationCsvFile" accept=".csv" class="hidden" />
-                </label>
-            </div>
-        </div>
-        <button id="pauseButton" class="fixed bottom-28 right-8 w-12 h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 group z-[9999] shadow-lg ring-1 ring-migros/10">
-            <i data-lucide="pause" class="w-6 h-6 text-gray-600 group-hover:text-migros transition-colors"></i>
-        </button>
-    </div>
-
-    <script src="modules/slides.js"></script>
-    <script src="modules/dataAnalyzer.js"></script>
-    <script src="modules/eventHandler.js"></script>
-    <script src="app.js"></script>
-    <script>
-        // Initialize the application
-        window.SAMPLE_DATA = `Datum;Zeit;Filiale;Kassennummer;Transaktionsnummer;Artikel;Menge;Aktion;Umsatz
-02.01.2024;15:15:20;MMM Fisibach;733;2;Fasnachtschüechli to g;1;0.00;2.10
-02.01.2024;15:15:20;MMM Fisibach;733;2;Fasnachtschüechli to g;-1;0.00;-2.10
-02.01.2024;15:15:20;MMM Fisibach;733;2;Wirz;0.565;0.00;1.75
-02.01.2024;15:15:20;MMM Fisibach;733;2;Weisskabis;1.237;0.00;2.35
-04.01.2024;10:38:03;MMM Fisibach;101;24;Sterilisierungsglas;1;0.00;4.50
-04.01.2024;10:38:03;MMM Fisibach;101;24;Sterilisierungsglas;-1;0.00;-4.50
-04.01.2024;10:38:03;MMM Fisibach;101;24;Monini Classico 1l;1;0.00;16.95
-14.02.2024;17:32:14;MMM Fisibach;404;280;CUMULUS BON 5.-;0;0;-5.00
-04.01.2024;10:38:03;MMM Fisibach;101;24;YF Fresh Berry;1;0.00;4.95
-02.01.2024;15:15:20;MMM Fisibach;622;2;Kartoffeln festkochend;0.750;0.00;1.50
-05.01.2024;09:15:30;M Oerlikon;123;45;Bio Bananen;0.856;0.00;3.20
-05.01.2024;09:15:30;M Oerlikon;123;45;M-Classic Milch;2;0.00;3.60
-05.01.2024;09:15:30;M Oerlikon;123;45;Vollkornbrot;1;0.00;3.80
-06.01.2024;14:22:45;MM Sihlcity;345;67;Tomaten Cherry;1;0.00;4.20
-06.01.2024;14:22:45;MM Sihlcity;345;67;Apfel Gala;0.750;0.00;3.15
-06.01.2024;14:22:45;MM Sihlcity;345;67;Bio Karotten;0.500;0.00;2.40
-07.01.2024;11:45:20;MMM Glatt;789;89;Café Royal Kapseln;2;0.00;11.80
-07.01.2024;11:45:20;MMM Glatt;789;89;Butter;1;0.00;3.95
-07.01.2024;11:45:20;MMM Glatt;789;89;M-Classic Joghurt;4;0.00;4.00
-08.02.2024;16:30:10;M Wiedikon;234;90;Thon in Öl;2;0.00;6.40
-08.02.2024;16:30:10;M Wiedikon;234;90;Zwiebeln;0.450;0.00;1.15
-08.02.2024;12:20:30;MM Altstetten;567;102;Spaghetti;2;0.00;3.60
-08.02.2024;12:20:30;MM Altstetten;567;102;Tomatensauce;1;0.00;2.95
-10.01.2024;10:05:15;MMM Letzipark;890;120;Bio Eier;1;0.00;7.50
-10.01.2024;10:05:15;MMM Letzipark;890;120;Olivenöl Extra;1;0.00;8.95
-11.01.2024;13:40:25;M Seebach;432;145;Toast;1;0.00;2.95
-11.01.2024;13:40:25;M Seebach;432;145;Konfitüre;1;0.00;3.80
-12.01.2024;15:55:40;MM Brunaupark;678;167;Waschmittel;1;0.00;14.95
-12.01.2024;15:55:40;MM Brunaupark;678;167;Toilettenpapier;1;0.00;8.90
-13.01.2024;09:25:50;MMM Shoppyland;901;189;CUMULUS BON 10.-;0;0;-10.00`;
-
-        // Initialize Lucide icons and start the application
-        lucide.createIcons();
-        new MigrosWrapped();
-    </script>
+<div id=upload-container class="h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image:url('banner.png');transform:translateY(-8rem) scale(1.2)"></div>
+<div class="container mx-auto px-5 sm:px-6 max-w-4xl relative">
+<div class="text-center mb-8 sm:mb-6 space-y-4 sm:space-y-3">
+<div class="flex justify-center mb-3">
+<div class="w-14 h-14 sm:w-12 sm:h-12 bg-migros/10 rounded-full flex items-center justify-center">
+<i data-lucide=shopping-cart class="w-7 h-7 sm:w-6 sm:h-6 text-migros"></i>
+</div>
+</div>
+<h1 class="text-4xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2 sm:mb-1">
+Dein <span class=text-migros>Migi</span> Jahr
+</h1>
+<p class="text-lg sm:text-base text-gray-600">Lass uns deine Einkaufsreise entdecken!</p>
+</div>
+<div class="grid md:grid-cols-2 gap-5 sm:gap-3 max-w-2xl mx-auto">
+<div class="bg-white rounded-lg shadow p-5 sm:p-3 transform sm:hover:scale-105 transition-transform duration-300">
+<input type=file id=csvFile accept=.csv class=hidden>
+<label for=csvFile class="cursor-pointer block">
+<div class="border border-dashed border-migros/30 rounded p-4 sm:p-3 hover:border-migros transition-colors">
+<div class="text-center space-y-4 sm:space-y-3">
+<div class="bg-migros/10 rounded-full w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center mx-auto">
+<i data-lucide=upload-cloud class="w-6 h-6 sm:w-5 sm:h-5 text-migros"></i>
+</div>
+<div>
+<p class="text-lg sm:text-base font-semibold text-gray-800">Daten hochladen</p>
+<p class="text-sm sm:text-xs text-gray-600">Für ein personalisiertes Erlebnis analysiere die CSV-Datei deiner Migros-Kassenbelege</p>
+<div class="mt-3 sm:mt-2 text-sm sm:text-xs text-gray-500 bg-blue-50 p-3 sm:p-2 rounded">
+<i data-lucide=shield class="w-4 h-4 inline mr-1 text-blue-600"></i>
+Deine Daten werden ausschließlich lokal in deinem Browser verarbeitet und nicht hochgeladen
+</div>
+<div class="mt-4 sm:mt-3 flex flex-col gap-3 sm:gap-2">
+<a href=help/help.html class="inline-flex items-center gap-2 sm:gap-1.5 text-base sm:text-sm text-migros hover:text-migros/80 transition-colors">
+<i data-lucide=file-text class="w-5 h-5 sm:w-4 sm:h-4"></i>
+Anleitung: CSV-Datei herunterladen
+</a>
+<a href=help/help.html#privacy class="inline-flex items-center gap-2 sm:gap-1.5 text-base sm:text-sm text-migros hover:text-migros/80 transition-colors">
+<i data-lucide=shield class="w-5 h-5 sm:w-4 sm:h-4"></i>
+Mehr zum Datenschutz
+</a>
+</div>
+</div>
+</div>
+</div>
+</label>
+</div>
+<div class="bg-white rounded-lg shadow p-5 sm:p-3 transform sm:hover:scale-105 transition-transform duration-300">
+<div class="text-center space-y-4 sm:space-y-3">
+<div class="bg-migros/10 rounded-full w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center mx-auto">
+<i data-lucide=sparkles class="w-6 h-6 sm:w-5 sm:h-5 text-migros"></i>
+</div>
+<div>
+<p class="text-lg sm:text-base font-semibold text-gray-800">Demo-Version testen</p>
+<p class="text-sm sm:text-xs text-gray-600">Erlebe die Funktionen mit unseren Beispieldaten</p>
+</div>
+<button id=startButton class="bg-migros text-white font-medium py-2.5 sm:py-1.5 px-6 sm:px-4 rounded-full text-base sm:text-sm transition-all hover:bg-migros/90 hover:shadow flex items-center justify-center w-full group">
+<i data-lucide=play class="w-6 h-6 sm:w-5 sm:h-5 mr-2"></i>
+Demo starten
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id=presentation-wrapper class="hidden fixed inset-0 isolate">
+<div id=presentation-container class="fixed inset-0 bg-gray-100">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gray-200">
+<div id=progress-bar class="h-full bg-migros transition-all duration-[5000ms] ease-linear w-0"></div>
+</div>
+<div id=slide-container class="relative flex-grow">
+<div id=slide-content class="text-gray-800 h-[calc(100vh-5rem)] flex flex-col pt-8 overflow-y-auto">
+</div>
+</div>
+<div class="fixed bottom-0 left-0 right-0 h-20 bg-gray-100 flex flex-col sm:flex-row items-center justify-center gap-4 text-gray-800 text-sm px-4 border-t border-gray-200">
+<div class="flex items-center gap-4">
+<span class="hidden sm:inline">Leertaste zum Pausieren, Pfeiltasten zum Navigieren</span>
+<span class=sm:hidden>Zum Navigieren wischen</span>
+<span id=page-indicator class=text-gray-600></span>
+</div>
+<span class="text-gray-400 hidden sm:inline">|</span>
+<label class="cursor-pointer hover:text-migros transition-colors flex items-center gap-1 whitespace-nowrap">
+<i data-lucide=upload class="w-4 h-4"></i>
+<span>Neue CSV hochladen</span>
+<input type=file id=presentationCsvFile accept=.csv class=hidden>
+</label>
+</div>
+</div>
+<button id=pauseButton class="fixed bottom-28 right-8 w-14 h-14 sm:w-12 sm:h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 group z-[9999] shadow-lg ring-1 ring-migros/10">
+<i data-lucide=pause class="w-7 h-7 sm:w-6 sm:h-6 text-gray-600 group-hover:text-migros transition-colors"></i>
+</button>
+</div>
+<script src=modules/utils/config.js></script>
+<script src=modules/utils/chartConfig.js></script>
+<script src=modules/utils/slideTemplate.js></script>
+<script src=modules/slides.js></script>
+<script src=modules/slideTimer.js></script>
+<script src=modules/slideManager.js></script>
+<script src=modules/eventHandler.js></script>
+<script src=modules/analyzers/timeAnalyzer.js></script>
+<script src=modules/analyzers/spendingAnalyzer.js></script>
+<script src=modules/analyzers/productAnalyzer.js></script>
+<script src=modules/dataAnalyzer.js></script>
+<script src=modules/slideCreator.js></script>
+<script src=app.js></script>
+<script>window.SAMPLE_DATA="Datum;Zeit;Filiale;Kassennummer;Transaktionsnummer;Artikel;Menge;Aktion;Umsatz\n02.01.2024;15:15:20;MMM Fisibach;733;2;Fasnachtschüechli to g;1;0.00;2.10\n02.01.2024;15:15:20;MMM Fisibach;733;2;Fasnachtschüechli to g;-1;0.00;-2.10\n02.01.2024;15:15:20;MMM Fisibach;733;2;Wirz;0.565;0.00;1.75\n02.01.2024;15:15:20;MMM Fisibach;733;2;Weisskabis;1.237;0.00;2.35\n04.01.2024;10:38:03;MMM Fisibach;101;24;Sterilisierungsglas;1;0.00;4.50\n04.01.2024;10:38:03;MMM Fisibach;101;24;Sterilisierungsglas;-1;0.00;-4.50\n04.01.2024;10:38:03;MMM Fisibach;101;24;Monini Classico 1l;1;0.00;16.95\n14.02.2024;17:32:14;MMM Fisibach;404;280;CUMULUS BON 5.-;0;0;-5.00\n04.01.2024;10:38:03;MMM Fisibach;101;24;YF Fresh Berry;1;0.00;4.95\n02.01.2024;15:15:20;MMM Fisibach;622;2;Kartoffeln festkochend;0.750;0.00;1.50\n05.01.2024;09:15:30;M Oerlikon;123;45;Bio Bananen;0.856;0.00;3.20\n05.01.2024;09:15:30;M Oerlikon;123;45;M-Classic Milch;2;0.00;3.60\n05.01.2024;09:15:30;M Oerlikon;123;45;Vollkornbrot;1;0.00;3.80\n06.01.2024;14:22:45;MM Sihlcity;345;67;Tomaten Cherry;1;0.00;4.20\n06.01.2024;14:22:45;MM Sihlcity;345;67;Apfel Gala;0.750;0.00;3.15\n06.01.2024;14:22:45;MM Sihlcity;345;67;Bio Karotten;0.500;0.00;2.40\n07.01.2024;11:45:20;MMM Glatt;789;89;Café Royal Kapseln;2;0.00;11.80\n07.01.2024;11:45:20;MMM Glatt;789;89;Butter;1;0.00;3.95\n07.01.2024;11:45:20;MMM Glatt;789;89;M-Classic Joghurt;4;0.00;4.00\n08.02.2024;16:30:10;M Wiedikon;234;90;Thon in Öl;2;0.00;6.40\n08.02.2024;16:30:10;M Wiedikon;234;90;Zwiebeln;0.450;0.00;1.15\n08.02.2024;12:20:30;MM Altstetten;567;102;Spaghetti;2;0.00;3.60\n08.02.2024;12:20:30;MM Altstetten;567;102;Tomatensauce;1;0.00;2.95\n10.01.2024;10:05:15;MMM Letzipark;890;120;Bio Eier;1;0.00;7.50\n10.01.2024;10:05:15;MMM Letzipark;890;120;Olivenöl Extra;1;0.00;8.95\n11.01.2024;13:40:25;M Seebach;432;145;Toast;1;0.00;2.95\n11.01.2024;13:40:25;M Seebach;432;145;Konfitüre;1;0.00;3.80\n12.01.2024;15:55:40;MM Brunaupark;678;167;Waschmittel;1;0.00;14.95\n12.01.2024;15:55:40;MM Brunaupark;678;167;Toilettenpapier;1;0.00;8.90\n13.01.2024;09:25:50;MMM Shoppyland;901;189;CUMULUS BON 10.-;0;0;-10.00",lucide.createIcons(),new MigrosWrapped</script>
 </body>
 </html>
