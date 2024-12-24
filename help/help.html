@@ -1,94 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=de>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Migi Wrapped - Help</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        migros: '#ff6b00',
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Migi Wrapped - Hilfe</title>
+<script src=https://cdn.tailwindcss.com></script>
+<script src=https://unpkg.com/lucide@latest></script>
+<script>tailwind.config={theme:{extend:{colors:{migros:"#ff6b00"}}}}</script>
 </head>
-<body class="bg-gray-100 min-h-screen relative">
-    <a href="../index.html" class="fixed top-4 left-4 w-10 h-10 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 group shadow-lg ring-1 ring-migros/10">
-        <i data-lucide="arrow-left" class="w-5 h-5 text-gray-600 group-hover:text-migros transition-colors"></i>
-    </a>
-    <div class="container mx-auto px-4 max-w-4xl py-8">
-        <div class="text-center mb-6 space-y-3">
-            <div class="flex justify-center mb-3">
-                <div class="w-12 h-12 bg-migros/10 rounded-full flex items-center justify-center">
-                    <i data-lucide="help-circle" class="w-6 h-6 text-migros"></i>
-                </div>
-            </div>
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
-                How to use <span class="text-migros">Migi</span> Wrapped
-            </h1>
-            <p class="text-base text-gray-600">Follow these steps to get your personalized shopping insights</p>
-        </div>
-
-        <div class="space-y-8 max-w-2xl mx-auto">
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="space-y-2 mb-4">
-                    <h2 class="text-xl font-semibold text-gray-800">Step 1: Login to Migros Account</h2>
-                    <p class="text-gray-600">Visit <a href="https://account.migros.ch" target="_blank" class="text-migros hover:underline">account.migros.ch</a> and log in to your account.</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="space-y-2 mb-4">
-                    <h2 class="text-xl font-semibold text-gray-800">Step 2: Navigate to Purchases</h2>
-                    <p class="text-gray-600">Go to Einkäufe "Purchases" at <a href="https://account.migros.ch/purchases/receipts" target="_blank" class="text-migros hover:underline">account.migros.ch/purchases/receipts</a></p>
-                </div>
-                <img src="step1.png" alt="Navigate to Purchases" class="rounded-lg border border-gray-200 w-full">
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="space-y-2 mb-4">
-                    <h2 class="text-xl font-semibold text-gray-800">Step 3: Download Your Data</h2>
-                    <p class="text-gray-600">Click the download button, select the correct year, and download as table/CSV format.</p>
-                </div>
-                <img src="step2.png" alt="Download CSV" class="rounded-lg border border-gray-200 w-full">
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="space-y-2">
-                    <h2 class="text-xl font-semibold text-gray-800">Step 4: Upload to Migros Wrapped</h2>
-                    <p class="text-gray-600">Return to <a href="/" class="text-migros hover:underline">migi-wrapped.ch</a> and upload your downloaded CSV file.</p>
-                </div>
-            </div>
-
-            <div id="disclaimer" class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-400">
-                <div class="space-y-2">
-                    <h2 class="text-xl font-semibold text-gray-800">Disclaimer</h2>
-                    <div class="text-gray-600 space-y-2">
-                        <p>This is a free tool with no obligations. I have no affiliations with Migros.</p>
-                        <p>All data (CSV files or any other entered data) is processed locally in your browser and stays on your device. No data is collected or stored on any servers.</p>
-                        <p>Works best with modern browsers (Chrome, Firefox, Safari, Edge). No additional software installation required.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <a href="../index.html" class="inline-flex items-center justify-center px-6 py-3 bg-migros text-white font-medium rounded-full transition-all hover:bg-migros/90 hover:shadow">
-                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
-                    Back to Home
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
+<body class="bg-gray-100 min-h-screen relative overflow-x-hidden">
+<a href=../index.html class="fixed top-4 left-4 w-10 h-10 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 group shadow-lg ring-1 ring-migros/10">
+<i data-lucide=arrow-left class="w-5 h-5 text-gray-600 group-hover:text-migros transition-colors"></i>
+</a>
+<div class="container mx-auto px-4 max-w-5xl py-8 mt-16">
+<div class="text-center mb-6 space-y-3">
+<div class="flex justify-center mb-3">
+<div class="w-12 h-12 bg-migros/10 rounded-full flex items-center justify-center">
+<i data-lucide=help-circle class="w-6 h-6 text-migros"></i>
+</div>
+</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
+So verwendest du <span class=text-migros>Migi</span> Wrapped
+</h1>
+<p class="text-base text-gray-600">Folge diesen Schritten, um deine personalisierten Einkaufseinblicke zu erhalten</p>
+</div>
+<div class="space-y-8 max-w-3xl mx-auto">
+<div class="bg-white rounded-2xl shadow-lg p-8">
+<div class="flex items-center gap-4 mb-4">
+<div class="bg-migros/10 rounded-full p-3">
+<i data-lucide=log-in class="w-6 h-6 text-migros"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Schritt 1: Anmeldung beim Migros-Konto</h2>
+</div>
+<p class="text-gray-600 pl-[3.25rem]">Besuche <a href=https://account.migros.ch target=_blank class="text-migros hover:underline">account.migros.ch</a> und melde dich bei deinem Konto an.</p>
+</div>
+<div class="bg-white rounded-2xl shadow-lg p-8">
+<div class="flex items-center gap-4 mb-4">
+<div class="bg-migros/10 rounded-full p-3">
+<i data-lucide=shopping-cart class="w-6 h-6 text-migros"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Schritt 2: Zu den Einkäufen navigieren</h2>
+</div>
+<p class="text-gray-600 pl-[3.25rem] mb-6">Gehe zu "Einkäufe" unter <a href=https://account.migros.ch/purchases/receipts target=_blank class="text-migros hover:underline">account.migros.ch/purchases/receipts</a></p>
+<img src=step1.png alt="Zu den Einkäufen navigieren" class="rounded-xl border border-gray-100 w-full shadow-sm">
+</div>
+<div class="bg-white rounded-2xl shadow-lg p-8">
+<div class="flex items-center gap-4 mb-4">
+<div class="bg-migros/10 rounded-full p-3">
+<i data-lucide=download class="w-6 h-6 text-migros"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Schritt 3: Daten herunterladen</h2>
+</div>
+<p class="text-gray-600 pl-[3.25rem] mb-6">Klicke auf den Download-Button, wähle das gewünschte Jahr und lade die Daten im Tabellen-/CSV-Format herunter.</p>
+<img src=step2.png alt="CSV herunterladen" class="rounded-xl border border-gray-100 w-full shadow-sm">
+</div>
+<div class="bg-white rounded-2xl shadow-lg p-8">
+<div class="flex items-center gap-4 mb-4">
+<div class="bg-migros/10 rounded-full p-3">
+<i data-lucide=upload-cloud class="w-6 h-6 text-migros"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Schritt 4: Bei Migros Wrapped hochladen</h2>
+</div>
+<p class="text-gray-600 pl-[3.25rem]">Kehre zu <a href=/ class="text-migros hover:underline">migi-wrapped.ch</a> zurück und lade deine heruntergeladene CSV-Datei hoch.</p>
+</div>
+<div id=privacy class="bg-white rounded-2xl shadow-lg p-8">
+<div class=space-y-6>
+<div class="flex items-center gap-4">
+<div class="bg-blue-50 rounded-full p-3">
+<i data-lucide=shield class="w-6 h-6 text-blue-600"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Datenschutz & Sicherheit</h2>
+</div>
+<div class="text-gray-600 space-y-4 pl-[3.25rem]">
+<p class=font-medium>Deine Daten bleiben bei dir:</p>
+<ul class="list-disc pl-5 space-y-1">
+<li>Alle Datenverarbeitung findet ausschließlich lokal in deinem Browser statt</li>
+<li>Die CSV-Datei wird nie an einen Server übertragen</li>
+<li>Es werden keine Daten gespeichert oder gesammelt</li>
+<li>Der gesamte Code läuft client-seitig und ist open source</li>
+</ul>
+<p class=mt-4>Diese Anwendung ist als sicheres, lokales Tool konzipiert, das deine Privatsphäre respektiert.</p>
+</div>
+</div>
+</div>
+<div id=disclaimer class="bg-white rounded-2xl shadow-lg p-8">
+<div class=space-y-6>
+<div class="flex items-center gap-4">
+<div class="bg-yellow-50 rounded-full p-3">
+<i data-lucide=alert-circle class="w-6 h-6 text-yellow-600"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Haftungsausschluss</h2>
+</div>
+<div class="text-gray-600 space-y-4 pl-[3.25rem]">
+<p>Dies ist ein kostenloses Tool ohne Verpflichtungen. Ich habe keine Verbindungen zu Migros.</p>
+<p>Funktioniert am besten mit modernen Browsern (Chrome, Firefox, Safari, Edge). Keine zusätzliche Softwareinstallation erforderlich.</p>
+</div>
+</div>
+</div>
+<div class=text-center>
+<a href=../index.html class="inline-flex items-center justify-center px-6 py-3 bg-migros text-white font-medium rounded-full transition-all hover:bg-migros/90 hover:shadow-lg">
+<i data-lucide=arrow-left class="w-4 h-4 mr-2"></i>
+Zurück zur Startseite
+</a>
+</div>
+</div>
+</div>
+<script>lucide.createIcons()</script>
 </body>
 </html>
